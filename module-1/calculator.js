@@ -6,7 +6,7 @@ let arr = Array.from(buttons);
 arr.forEach(buttons => {
     buttons.addEventListener('click', (e) =>{
         if(e.target.innerHTML == '='){
-            string = eval(string);
+           string = evaluateExpression(string);
             input.value = string;
 
 
@@ -18,7 +18,7 @@ arr.forEach(buttons => {
         }
         else if(e.target.innerHTML == 'DEL'){
             string = string.substring(0,string.length-1);
-            input.value = string;7
+            input.value = string;
 
         }
 
@@ -27,6 +27,12 @@ arr.forEach(buttons => {
             input.value = string;
         }
         
-    })
+    });
 }
- )
+ );
+function evaluateExpression(expr) { 
+    try {
+        return Function('"use strict";return (' + expr + ')')();
+    } catch (e) { 
+        return "Error"; 
+    } }
